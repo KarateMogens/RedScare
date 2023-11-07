@@ -46,20 +46,15 @@ def problem_alternate(V, E, R, s, t):
     graph = Digraph(n)
 
     for u,v in E:
-
         if (u not in R and v not in R) or (u in R and v in R):
             continue
-
         graph.add_edge(indexes[u],indexes[v])
-
         if not is_directed:
             graph.add_edge(indexes[v],indexes[u])
            
     path = BreadthFirstPaths(graph, indexes[s])
-
     if path.has_path_to(indexes[t]):
         return True
-    
     return False
 
 
