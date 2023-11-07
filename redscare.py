@@ -2,13 +2,15 @@ red_vertices = set()
 n, m, r = (int(x) for x in input().split())
 s, t = input().split()
 vertices = []
+indexes = {}
 edges = []
 is_directed = False
 
-for _ in range(n):
+for i in range(n):
     line = input()
     name = line.split()[0]
     vertices.append(name)
+    indexes[name] = i
     if line[-1] == '*':
         red_vertices.add(name)
 
