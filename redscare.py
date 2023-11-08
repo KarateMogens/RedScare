@@ -1,5 +1,8 @@
 from itu.algs4.graphs.graph import *
 from itu.algs4.graphs.digraph import *
+from itu.algs4.graphs.edge_weighted_digraph import *
+from itu.algs4.graphs.dijkstra_sp import *
+from itu.algs4.graphs.directed_edge import *
 from itu.algs4.graphs.cycle import *
 from itu.algs4.graphs.directed_cycle import *
 from itu.algs4.graphs.breadth_first_paths import *
@@ -57,6 +60,16 @@ def problem_alternate(V, E, R, s, t):
         return True
     return False
 
+def problem_few(V, E, R, s, t):
+    graph = EdgeWeightedDigraph(n)
 
-
-
+    for u,v in E:
+        weight = 1 if v in R else 0
+        edge = DirectedEdge(indexes[u],indexes[v],weight)
+        graph.add_edge(edge)
+    
+    sp = DijkstraSP(graph, indexes[s])
+    if sp.has_path_to(indexes[t]):
+        print(sp.path_to(indexes[t]))
+        return int(sp.dist_to(indexes[t])) + (1 if s in R else 0)
+    return -1
