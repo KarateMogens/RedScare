@@ -204,9 +204,9 @@ class BellmanFordSP:
                 if self._distTo[v] + e.weight() != self._distTo[w]:
                     print("edge {} on shortest path not tight".format(e))
                     return False
-
-        print("Satisfies optimality conditions")
-        print()
+        # Removed this output - nimj
+        # print("Satisfies optimality conditions")
+        # print()
         return True
 
     # raise an IllegalArgumentException unless 0 <= v < V
