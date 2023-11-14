@@ -5,7 +5,10 @@ from itu.algs4.graphs.dijkstra_sp import *
 from itu.algs4.graphs.directed_edge import *
 from itu.algs4.graphs.cycle import *
 from itu.algs4.graphs.directed_cycle import *
+from itu.algs4.graphs.edge_weighted_directed_cycle import *
 from itu.algs4.graphs.breadth_first_paths import *
+from itu.algs4.graphs.bellman_ford_sp import *
+from itu.algs4.graphs.acyclic_lp import *
 
 
 n, m, r = (int(x) for x in input().split())
@@ -73,3 +76,18 @@ def problem_few(V, E, R, s, t):
         print(sp.path_to(indexes[t]))
         return int(sp.dist_to(indexes[t])) + (1 if s in R else 0)
     return -1
+
+def problem_many(V, E, R, s, t):
+    if not is_directed:
+        return '?!' # NP-hard on undirected graphs
+    graph = EdgeWeightedDigraph(n)
+    for u,v in E:
+        edge = DirectedEdge(indexes[u], indexes[v], -1 if v in R else float('inf'))
+        graph.add_edge(edge)
+    dc = EdgeWeightedDirectedCycle(graph)
+    if dc.has_cycle():
+        return '?!' # NP-hard on directed graphs with a cycle
+    
+    sp = BellmanFordSP(graph, indexes[s])
+    if sp.has_path_to(indexes[t]):
+        return -int(sp.dist_to(indexes[t])) + (1 if s in R else 0)
