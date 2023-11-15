@@ -79,7 +79,17 @@ def problem_few(V, E, R, s, t):
 
 def problem_many(V, E, R, s, t):
     if not is_directed:
-        return '?!' # NP-hard on undirected graphs
+        graph = Graph(n)
+        for u,v in E:
+            graph.add_edge(indexes[u], indexes[v])
+        cycle = Cycle(graph)
+        if cycle.has_cycle():
+            return '?!' # NP-hard on undirected non-trees
+        bfs = BreadthFirstPaths(graph, indexes[s])
+        if bfs.has_path_to(indexes[t]):
+            p = bfs.path_to(indexes[t])
+            return sum(V[v] in R for v in bfs.path_to(indexes[t]))
+        return -1
     graph = EdgeWeightedDigraph(n)
     for u,v in E:
         edge = DirectedEdge(indexes[u], indexes[v], -1 if v in R else float('inf'))
@@ -91,3 +101,4 @@ def problem_many(V, E, R, s, t):
     sp = BellmanFordSP(graph, indexes[s])
     if sp.has_path_to(indexes[t]):
         return -int(sp.dist_to(indexes[t])) + (1 if s in R else 0)
+    return -1
