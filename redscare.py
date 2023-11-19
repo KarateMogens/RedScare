@@ -94,7 +94,7 @@ def problem_many(V, E, R, s, t):
         return -1
     graph = EdgeWeightedDigraph(n)
     for u,v in E:
-        edge = DirectedEdge(indexes[u], indexes[v], -1 if v in R else float('inf'))
+        edge = DirectedEdge(indexes[u], indexes[v], -1 if v in R else 0)
         graph.add_edge(edge)
     dc = EdgeWeightedDirectedCycle(graph)
     if dc.has_cycle():
