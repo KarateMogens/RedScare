@@ -122,7 +122,7 @@ def problem_some(V, E, R, s, t):
                 return True
         return False
 
-    flow_network, flow_sink = some_convert_to_directed_flow(E, s)
+    flow_network, flow_sink = some_convert_to_directed_flow(E, s, t)
     for r in R:
         r_out = indexes[r] * 2 + 1
         if(flow_network.max_flow(r_out, flow_sink) == 2):
@@ -130,7 +130,7 @@ def problem_some(V, E, R, s, t):
         flow_network.reset()
     return False
 
-def some_convert_to_directed_flow(E, s):
+def some_convert_to_directed_flow(E, s, t):
     # By convention, the in-vertex v is at index 2v, and the
     # out-vertex is at index 2v+1.
     # The sink of the flow network is at the last index
@@ -144,8 +144,8 @@ def some_convert_to_directed_flow(E, s):
         graph.add_edge(2 * v, 2 * v + 1, 1)
 
     flow_sink = n * 2
-    graph.add_edge(indexes[s], flow_sink, 1)
-    graph.add_edge(indexes[s], flow_sink, 1)
+    graph.add_edge(indexes[s]*2, flow_sink, 1)
+    graph.add_edge(indexes[t]*2, flow_sink, 1)
 
     return graph, flow_sink
 
