@@ -115,9 +115,9 @@ def problem_some(V, E, R, s, t):
         cycle = DirectedCycle(graph)
         if cycle.has_cycle():
             return "?!" # NP-hard in general on directed graphs
-        bfs_source = BreadthFirstPaths(G, indexes[s])
+        bfs_source = BreadthFirstPaths(graph, indexes[s])
         for r in R:
-            bfs_r = BreadthFirstPaths(G, indexes[r])
+            bfs_r = BreadthFirstPaths(graph, indexes[r])
             if bfs_source.has_path_to(indexes[r]) and bfs_r.has_path_to(indexes[t]):
                 return True
         return False
