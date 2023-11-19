@@ -68,13 +68,14 @@ def problem_few(V, E, R, s, t):
     graph = EdgeWeightedDigraph(n)
 
     for u,v in E:
-        weight = 1 if v in R else 0
-        edge = DirectedEdge(indexes[u],indexes[v],weight)
+        edge = DirectedEdge(indexes[u],indexes[v],1 if v in R else 0)
         graph.add_edge(edge)
+        if not is_directed:
+            edge2 = DirectedEdge(indexes[v], indexes[u], 1 if u in R else 0)
+            graph.add_edge(edge2)
     
     sp = DijkstraSP(graph, indexes[s])
     if sp.has_path_to(indexes[t]):
-        print(sp.path_to(indexes[t]))
         return int(sp.dist_to(indexes[t])) + (1 if s in R else 0)
     return -1
 
@@ -147,3 +148,11 @@ def some_convert_to_directed_flow(E, s):
     graph.add_edge(indexes[s], flow_sink, 1)
 
     return graph, flow_sink
+
+print('\t'.join(map(str,(n,
+                         problem_alternate(vertices, edges, red_vertices, s, t),
+                         problem_few(vertices, edges, red_vertices, s, t),
+                         problem_many(vertices, edges, red_vertices, s, t),
+                         problem_none(vertices, edges, red_vertices, s, t),
+                         problem_some(vertices, edges, red_vertices, s, t)
+                         ))))
