@@ -10,6 +10,9 @@ from itu.algs4.graphs.breadth_first_paths import *
 from itu.algs4.graphs.bellman_ford_sp import *
 from itu.algs4.graphs.acyclic_lp import *
 import flow.NetworkFlow as nf
+import sys
+
+sys.setrecursionlimit(100000) # Necessary for DFS on large graphs
 
 n, m, r = (int(x) for x in input().split())
 s, t = input().split()
