@@ -11,7 +11,6 @@ from itu.algs4.graphs.bellman_ford_sp import *
 from itu.algs4.graphs.acyclic_lp import *
 import flow.NetworkFlow as nf
 
-
 n, m, r = (int(x) for x in input().split())
 s, t = input().split()
 vertices = []
