@@ -1,5 +1,5 @@
 cwd=$(pwd)
-output="$cwd/output.txt"
+output="$cwd/results.txt"
 threshold=0 # Set lower bound; graphs with fewer vertices will be ignored.
 cd ./data
 > $output
