@@ -131,7 +131,9 @@ smallworld-50-1	2500	True	2	?!	-1	False
 wall-n-1	8	False	0	?!	1	True
 wall-n-10	80	False	0	?!	1	False
 wall-n-100	800	False	0	?!	1	False
-wall-n-1000	wall-n-10000	wall-n-2	16	False	0	?!	1	False
+wall-n-1000	8000	False	0	?!	1	False
+wall-n-10000	80000	False	0	?!	1	False
+wall-n-2	16	False	0	?!	1	False
 wall-n-3	24	False	0	?!	1	False
 wall-n-4	32	False	0	?!	1	False
 wall-p-1	8	False	0	?!	1	True
