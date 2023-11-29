@@ -10,6 +10,6 @@ for f in *.txt; do
   if [ "${firstline[0]}" -ge "$threshold" ]; then
     echo "Working on $f...";
     printf "${f%.*}\t" >> $output;
-    cat "$f" | python3 "../redscare.py" >> $output;
+    cat "$f" | python3 "../redscare.py" >> $output; # Change 'python3' to Python keyword of your choice
   fi
 done
