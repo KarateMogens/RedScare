@@ -108,8 +108,14 @@ def problem_many(V, E, R, s, t):
     return -1
 
 def problem_some(V, E, R, s, t):
-    if s in R or t in R:
-        return True # TODO only if there is a path from s to t
+    # If s or t are red, the problem reduces to "is there a path from s to t"
+    if s in R or t in R: 
+        G = Digraph(n)
+        for (u, v) in E:
+            G.add_edge(indexes[u], indexes[v])
+            if is_directed: G.add_edge(indexes[v], indexes[u])
+        path = BreadthFirstPaths(G, indexes[s])
+        return path.has_path_to(indexes[t])
     if is_directed:
         graph = Digraph(n)
         for u, v in E:
@@ -146,8 +152,8 @@ def some_convert_to_directed_flow(E, s, t):
         graph.add_edge(2 * v, 2 * v + 1, 1)
 
     flow_sink = n * 2
-    graph.add_edge(indexes[s]*2, flow_sink, 1)
-    graph.add_edge(indexes[t]*2, flow_sink, 1)
+    graph.add_edge(indexes[s]*2+1, flow_sink, 1)
+    graph.add_edge(indexes[t]*2+1, flow_sink, 1)
 
     return graph, flow_sink
 
